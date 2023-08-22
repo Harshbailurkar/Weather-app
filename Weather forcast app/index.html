@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>Weather App</h1>
+        <span>check the weather in your city </span>
+      </div>
+      <div class="search">
+        <input type="text" placeholder="Enter City Name" id="search-city" />
+        <button id="search-btn">Search</button>
+      </div>
+      <div id="weather-info">
+        <span class="time"></span>
+        <div class="location">
+          <span class="city"></span>
+          <span class="country"></span>
+        </div>
+        <div class="weatherinfo">
+          <div class="tempinfo">
+            <h2 class="temp"></h2>
+            <div class="degree" style="font-size: x-large">°C</div>
+          </div>
+
+          <img id="weathericon" src="" alt="" />
+          <span class="des"></span>
+        </div>
+        <div class="extrades">
+          <span class="humidity"></span>
+          <span class="windspeed"></span>
+        </div>
+        <div class="error">
+          <h1>Invalid City Name!!!</h1>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="./index.js"></script>
+  </body>
+  <footer>
+    <span>@harshbailurkar</span>
+    <a href="https://github.com/Harshbailurkar"> code is here</a>
+  </footer>
+</html>
