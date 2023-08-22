@@ -10,7 +10,7 @@ const weathericon = document.getElementById("weathericon");
 const windspeedEl = document.querySelector(".windspeed");
 const humidityEl = document.querySelector(".humidity");
 const degree = document.querySelector(".degree");
-let TimeEl = "";
+
 fetch(
   `https://api.openweathermap.org/data/2.5/weather?q=delhi&units=metric&appid=a05be99b59c95400567752b0623fa497`
 )
@@ -95,11 +95,11 @@ function time_date() {
       dayname = "Saturday";
       break;
   }
-  TimeEl = date.toTimeString();
+  
   const time = dayname + " " + date.toLocaleTimeString();
   return time;
 }
-console.log(TimeEl);
+
 
 function clear() {
   timeEl.textContent = "";
