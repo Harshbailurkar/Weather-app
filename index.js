@@ -18,7 +18,6 @@ fetch(
     return res.json();
   })
   .then((data) => {
-    console.log(time_date());
     timeEl.textContent = time_date();
     cityEl.textContent = data.name;
     countryEl.innerHTML = `<img src="https://flagsapi.com/${data.sys.country}/flat/64.png"></img>
