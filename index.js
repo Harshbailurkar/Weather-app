@@ -42,8 +42,7 @@ searchEl.addEventListener("click", () => {
       return res.json();
     })
     .then((data) => {
-      timeEl.textContent =
-        time_date().slice(0, 12) + " " + time_date().slice(-2);
+      timeEl.textContent = time_date();
       cityEl.textContent = data.name;
       countryEl.innerHTML = `<img src="https://flagsapi.com/${data.sys.country}/flat/64.png"></img>
       `;
@@ -97,8 +96,14 @@ function time_date() {
       break;
   }
 
-  const time = dayname + " " + date.toLocaleTimeString();
-  return time;
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const ampm = hours >= 12 ? "pm" : "am";
+    const formattedHours = hours % 12 === 0 ? 12 : hours % 12;
+    const formattedMinutes = minutes < 10 ? "0" + minutes : minutes;
+
+    const time = dayname + " " + formattedHours + ":" + formattedMinutes + " " + ampm;
+    return time;
 }
 
 function clear() {
