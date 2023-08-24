@@ -11,30 +11,34 @@ const windspeedEl = document.querySelector(".windspeed");
 const humidityEl = document.querySelector(".humidity");
 const degree = document.querySelector(".degree");
 
-fetch(
-  `https://api.openweathermap.org/data/2.5/weather?q=delhi&units=metric&appid=a05be99b59c95400567752b0623fa497`
-)
-  .then((res) => {
-    return res.json();
-  })
-  .then((data) => {
-    timeEl.textContent = time_date();
-    cityEl.textContent = data.name;
-    countryEl.innerHTML = `<img src="https://flagsapi.com/${data.sys.country}/flat/64.png"></img>
+async function defaultfun() {
+  await fetch(
+    `https://api.openweathermap.org/data/2.5/weather?q=delhi&units=metric&appid=a05be99b59c95400567752b0623fa497`
+  )
+    .then((res) => {
+      return res.json();
+    })
+    .then((data) => {
+      console.log(time_date());
+      timeEl.textContent = time_date();
+      cityEl.textContent = data.name;
+      countryEl.innerHTML = `<img src="https://flagsapi.com/${data.sys.country}/flat/64.png"></img>
       `;
-    tempEl.textContent = Math.round(data.main.temp);
+      tempEl.textContent = Math.round(data.main.temp);
 
-    degree.style.display = "block";
-    weathericonimg(data.weather[0].description);
-    const windSpeedKmh = (data.wind.speed * 3.6).toFixed(2);
-    descriptionEl.innerHTML = data.weather[0].description;
-    windspeedEl.textContent = " Wind Speed: " + windSpeedKmh + " km/h";
-    humidityEl.textContent = " Humidity: " + data.main.humidity + "%";
+      degree.style.display = "block";
+      weathericonimg(data.weather[0].description);
+      const windSpeedKmh = (data.wind.speed * 3.6).toFixed(2);
+      descriptionEl.innerHTML = data.weather[0].description;
+      windspeedEl.textContent = " Wind Speed: " + windSpeedKmh + " km/h";
+      humidityEl.textContent = " Humidity: " + data.main.humidity + "%";
 
-    errorEl.style.display = "none";
-  });
-searchEl.addEventListener("click", () => {
-  fetch(
+      errorEl.style.display = "none";
+    });
+}
+defaultfun();
+searchEl.addEventListener("click", async () => {
+  await fetch(
     `https://api.openweathermap.org/data/2.5/weather?q=${inputEl.value}&units=metric&appid=a05be99b59c95400567752b0623fa497`
   )
     .then((res) => {
@@ -66,10 +70,11 @@ searchEl.addEventListener("click", () => {
       }
     });
 });
+let date = new Date();
+const hours = date.getHours();
 
 function time_date() {
   let dayname = "";
-  let date = new Date();
   const day = date.getDay();
   switch (day) {
     case 0:
@@ -95,14 +100,14 @@ function time_date() {
       break;
   }
 
-    const hours = date.getHours();
-    const minutes = date.getMinutes();
-    const ampm = hours >= 12 ? "pm" : "am";
-    const formattedHours = hours % 12 === 0 ? 12 : hours % 12;
-    const formattedMinutes = minutes < 10 ? "0" + minutes : minutes;
+  const minutes = date.getMinutes();
+  const ampm = hours >= 12 ? "pm" : "am";
+  const formattedHours = hours % 12 === 0 ? 12 : hours % 12;
+  const formattedMinutes = minutes < 10 ? "0" + minutes : minutes;
 
-    const time = dayname + " " + formattedHours + ":" + formattedMinutes + " " + ampm;
-    return time;
+  const time =
+    dayname + " " + formattedHours + ":" + formattedMinutes + " " + ampm;
+  return time;
 }
 
 function clear() {
@@ -120,14 +125,14 @@ function clear() {
 function weathericonimg(weather) {
   switch (weather) {
     case "clear sky":
-      if (time_date().includes("AM") && time_date() < 12) {
+      if (hours > 5 && hours < 19) {
         weathericon.src = "./images/01.png";
       } else {
         weathericon.src = "./images/clearnight.png";
       }
       break;
     case "few clouds":
-      if (time_date().includes("AM") && time_date() < 12) {
+      if (hours > 5 && hours < 19) {
         weathericon.src = "./images/fewclouds.png";
       } else {
         weathericon.src = "./images/nightfewclouds.png";
@@ -146,7 +151,7 @@ function weathericonimg(weather) {
       weathericon.src = "./images/showerrain.png";
       break;
     case "rain":
-      if (time_date().includes("AM") && time_date() < 12) {
+      if (hours > 5 && hours < 19) {
         weathericon.src = "./images/rain.png";
       } else {
         weathericon.src = "./images/nightrain.png";
@@ -163,6 +168,9 @@ function weathericonimg(weather) {
       break;
     case "haze":
       weathericon.src = "./images/mist.png";
+      break;
+    case "light intensity drizzle":
+      weathericon.src = "./images/showerrain.png";
       break;
     default:
       weathericon.src = "./images/01.png";
