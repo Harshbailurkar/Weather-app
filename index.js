@@ -27,7 +27,7 @@ async function defaultfun() {
       tempEl.textContent = Math.round(data.main.temp);
 
       degree.style.display = "block";
-      weathericonimg(data.weather[0].description);
+      weathericonimg(data.weather[0].main);
       const windSpeedKmh = (data.wind.speed * 3.6).toFixed(2);
       descriptionEl.innerHTML = data.weather[0].description;
       windspeedEl.textContent = " Wind Speed: " + windSpeedKmh + " km/h";
@@ -52,7 +52,7 @@ searchEl.addEventListener("click", async () => {
       tempEl.textContent = Math.round(data.main.temp);
 
       degree.style.display = "block";
-      weathericonimg(data.weather[0].description);
+      weathericonimg(data.weather[0].main);
       const windSpeedKmh = (data.wind.speed * 3.6).toFixed(2);
       descriptionEl.innerHTML = data.weather[0].description;
       windspeedEl.textContent = " Wind Speed: " + windSpeedKmh + " km/h";
@@ -124,53 +124,59 @@ function clear() {
 
 function weathericonimg(weather) {
   switch (weather) {
-    case "clear sky":
+    case "Clear":
       if (hours > 5 && hours < 19) {
         weathericon.src = "./images/01.png";
       } else {
         weathericon.src = "./images/clearnight.png";
       }
       break;
-    case "few clouds":
+    case "Clouds":
       if (hours > 5 && hours < 19) {
         weathericon.src = "./images/fewclouds.png";
       } else {
         weathericon.src = "./images/nightfewclouds.png";
       }
       break;
-    case "scattered clouds":
-      weathericon.src = "./images/scatteredclouds.png";
-      break;
-    case "broken clouds":
+    case "Drizzle":
       weathericon.src = "./images/brokenclouds.png";
       break;
-    case "overcast clouds":
-      weathericon.src = "./images/brokenclouds.png";
-      break;
-    case "shower rain":
-      weathericon.src = "./images/showerrain.png";
-      break;
-    case "rain":
+    case "Rain":
       if (hours > 5 && hours < 19) {
         weathericon.src = "./images/rain.png";
       } else {
         weathericon.src = "./images/nightrain.png";
       }
       break;
-    case "thunderstorm":
+    case "Thunderstorm":
       weathericon.src = "./images/thunderstorm.png";
       break;
-    case "snow":
+    case "Snow":
       weathericon.src = "./images/snow.png";
       break;
-    case "mist":
+    case "Mist":
       weathericon.src = "./images/mist.png";
       break;
-    case "haze":
+    case "Haze":
       weathericon.src = "./images/mist.png";
       break;
-    case "light intensity drizzle":
-      weathericon.src = "./images/showerrain.png";
+    case "Fog":
+      weathericon.src = "./images/mist.png";
+      break;
+    case "Sand":
+      weathericon.src = "./images/mist.png";
+      break;
+    case "Dust":
+      weathericon.src = "./images/mist.png";
+      break;
+    case "Ash":
+      weathericon.src = "./images/mist.png";
+      break;
+    case "Squall":
+      weathericon.src = "./images/mist.png";
+      break;
+    case "Tornado":
+      weathericon.src = "./images/mist.png";
       break;
     default:
       weathericon.src = "./images/01.png";
