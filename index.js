@@ -36,8 +36,7 @@ async function defaultfun() {
       errorEl.style.display = "none";
     });
 }
-defaultfun();
-searchEl.addEventListener("click", async () => {
+async function fetchdatafunc() {
   await fetch(
     `https://api.openweathermap.org/data/2.5/weather?q=${inputEl.value}&units=metric&appid=a05be99b59c95400567752b0623fa497`
   )
@@ -69,6 +68,13 @@ searchEl.addEventListener("click", async () => {
         errorEl.style.display = "inline";
       }
     });
+}
+defaultfun();
+inputEl.addEventListener("search", async () => {
+  await fetchdatafunc();
+});
+searchEl.addEventListener("click", async () => {
+  await fetchdatafunc();
 });
 let date = new Date();
 const hours = date.getHours();
