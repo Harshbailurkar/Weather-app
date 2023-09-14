@@ -13,7 +13,7 @@ const degree = document.querySelector(".degree");
 
 async function defaultfun() {
   await fetch(
-    `https://api.openweathermap.org/data/2.5/weather?q=delhi&units=metric&appid=a05be99b59c95400567752b0623fa497`
+    `https://api.openweathermap.org/data/2.5/weather?q=delhi&units=metric&appid=YOUR-API-ID` //Enter Your API id here.
   )
     .then((res) => {
       return res.json();
@@ -38,7 +38,7 @@ async function defaultfun() {
 }
 async function fetchdatafunc() {
   await fetch(
-    `https://api.openweathermap.org/data/2.5/weather?q=${inputEl.value}&units=metric&appid=a05be99b59c95400567752b0623fa497`
+    `https://api.openweathermap.org/data/2.5/weather?q=${inputEl.value}&units=metric&appid=YOUR-API-ID` //Enter Your API id here.
   )
     .then((res) => {
       return res.json();
